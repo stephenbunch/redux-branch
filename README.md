@@ -18,6 +18,7 @@ We can get around these limitations by using "branches". A branch is just anothe
 ```js
 import React from 'react';
 import { createStore } from 'redux';
+import { branch } from 'redux-branch';
 
 import localReducer from './localReducer';
 
