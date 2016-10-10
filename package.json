@@ -1,0 +1,11 @@
+{
+  "name": "redux-branch",
+  "version": "0.1.0",
+  "description": "Branches for Redux stores.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Stephen Bunch",
+  "license": "MIT"
+}
