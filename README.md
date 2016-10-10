@@ -1,8 +1,8 @@
 # Redux Branch
 
 ## Table of Contents
-[Introduction](#introduction)
-[`branch()`](#branch)
+* [Introduction](#introduction)
+* [`branch(localReducer, mergeReducer)`](#branchlocalreducer-mergereducer)
 
 ## Introduction
 One of the [biggest sources of confusion](https://github.com/reactjs/redux/issues/1385) when learning to use Redux is knowing when to use the component's local state versus the global Redux state. This is because Redux assumes a single store for the entire app. Although there are many advantages to using a single store, there are also some disadvantages:
