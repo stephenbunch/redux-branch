@@ -1,5 +1,9 @@
 # Redux Branch
 
+[![NPM version][npm-image]][npm-url]
+[![Build status][travis-image]][travis-url]
+[![Test coverage][codecov-image]][codecov-url]
+
 ## Table of Contents
 * [Introduction](#introduction)
 * [`branch(storeFactory, reducer, actionTypes)`](#branchstorefactory-reducer-actiontypes)
@@ -14,7 +18,7 @@ One of the [biggest sources of confusion](https://github.com/reactjs/redux/issue
 
 We can get around these limitations by using "branches". A branch is just another tree of Redux state. This allows each component to have its own Redux store while still being able to interact with its parent store. This also allows us to reuse reducers anywhere in the tree.
 
-## `branch(storeFactory, [reducer], [actionTypes])`
+## `branch(storeFactory, [actionTypes])`
 ```js
 import React from 'react';
 import { createStore } from 'redux';
@@ -25,10 +29,6 @@ import someReducer from './someReducer';
 const branchedComponentFactory = branch(
   // Specify a factory for creating our local store.
   () => createStore(someReducer),
-
-  // Optionally subscribe to the parent store, and merge its state into our local
-  // store whenever the parent store's state changes.
-  (localState, parentState) => { ...parentState, ...localState },
 
   // By default, all actions pass through to the parent store (assuming a parent
   // store exists.) To handle actions within our local store, we must specify
@@ -44,3 +44,10 @@ const BranchedComponent = branchedComponentFactory(ReduxComponent);
 
 export default BranchedComponent;
 ```
+
+[npm-image]: https://img.shields.io/npm/v/redux-branch.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/redux-branch
+[travis-image]: https://img.shields.io/travis/stephenbunch/redux-branch.svg?style=flat-square
+[travis-url]: https://travis-ci.org/stephenbunch/redux-branch
+[codecov-image]: https://img.shields.io/codecov/c/github/stephenbunch/redux-branch.svg?style=flat-square
+[codecov-url]: https://codecov.io/github/stephenbunch/redux-branch
