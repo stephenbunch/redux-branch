@@ -34,8 +34,11 @@ const branchedComponentFactory = branch(
   // local store, we must specify the action types we want to capture.
   ['DO_SOMETHING_LOCAL']
 );
-const reduxComponentFactory = connect(mapStateToProps);
-const ReduxComponent = reduxComponentFactory(MyComponent);
+
+// Build our redux component like normal.
+const ReduxComponent = connect(mapStateToProps)(MyComponent);
+
+// Then wrap it with another component to provide our branched store.
 const BranchedComponent = branchedComponentFactory(ReduxComponent);
 
 export default BranchedComponent;
