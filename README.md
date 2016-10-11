@@ -37,4 +37,6 @@ const branchedComponentFactory = branch(
 const reduxComponentFactory = connect(mapStateToProps);
 const ReduxComponent = reduxComponentFactory(MyComponent);
 const BranchedComponent = branchedComponentFactory(ReduxComponent);
+
+export default BranchedComponent;
 ```
