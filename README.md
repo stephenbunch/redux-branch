@@ -35,5 +35,6 @@ const branchedComponentFactory = branch(
   ['DO_SOMETHING_LOCAL']
 );
 const reduxComponentFactory = connect(mapStateToProps);
-const Component = branchedComponentFactory(reduxComponentFactory(View));
+const ReduxComponent = reduxComponentFactory(MyComponent);
+const BranchedComponent = branchedComponentFactory(ReduxComponent);
 ```
