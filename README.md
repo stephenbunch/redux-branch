@@ -14,7 +14,7 @@ One of the [biggest sources of confusion](https://github.com/reactjs/redux/issue
 
 We can get around these limitations by using "branches". A branch is just another tree of Redux state. This allows each component to have its own Redux store while still being able to interact with its parent store. This also allows us to reuse reducers anywhere in the tree.
 
-## `branch(storeFactory, reducer, actionTypes)`
+## `branch(storeFactory, [reducer], [actionTypes])`
 ```js
 import React from 'react';
 import { createStore } from 'redux';
