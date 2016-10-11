@@ -4,7 +4,7 @@ export default class StoreBranch {
     this._branch = branch;
     this._actionTypes = actionTypes;
     this._reducer = reducer;
-    this._state = this._reducer(upstream, local);
+    this._state = this._reducer(upstream.getState(), local.getState());
     this._state = {
       ...upstream.getState(),
       ...branch.getState(),
@@ -25,7 +25,7 @@ export default class StoreBranch {
 
   subscribe(listener) {
     const update = () => {
-      this._state = this._reducer(upstream, local);
+      this._state = this._reducer(upstream.getState(), local.getState());
     };
     const unsubscribeFromUpstream = this._upstream.subscribe(update);
     const unsubscribeFromBranch = this._branch.subscribe(update);
