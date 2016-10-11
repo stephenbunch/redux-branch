@@ -2,7 +2,7 @@
 
 ## Table of Contents
 * [Introduction](#introduction)
-* [`branch(storeFactory, mergeReducer, actionTypes)`](#branchstorefactory-mergereducer-actiontypes)
+* [`branch(storeFactory, reducer, actionTypes)`](#branchstorefactory-reducer-actiontypes)
 
 ## Introduction
 One of the [biggest sources of confusion](https://github.com/reactjs/redux/issues/1385) when learning to use Redux is knowing when to use the component's local state versus the global Redux state. This is because Redux assumes a single store for the entire app. Although there are [many advantages](http://stackoverflow.com/questions/32461229/why-use-redux-over-facebook-flux) to using a single store, there are also some disadvantages:
@@ -14,7 +14,7 @@ One of the [biggest sources of confusion](https://github.com/reactjs/redux/issue
 
 We can get around these limitations by using "branches". A branch is just another tree of Redux state. This allows each component to have its own Redux store while still being able to interact with its parent store. This also allows us to reuse reducers anywhere in the tree.
 
-## `branch(storeFactory, mergeReducer, actionTypes)`
+## `branch(storeFactory, reducer, actionTypes)`
 ```js
 import React from 'react';
 import { createStore } from 'redux';
