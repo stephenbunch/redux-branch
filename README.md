@@ -26,12 +26,13 @@ const branchedComponentFactory = branch(
   // Specify a factory for creating our local store.
   () => createStore(someReducer),
 
-  // Optionally subscribe to the parent store and merge its state into our local
+  // Optionally subscribe to the parent store, and merge its state into our local
   // store whenever the parent store's state changes.
   (local, upstream) => { ...upstream, ...local },
 
-  // By default, all actions are dispatched upstream. To handle actions with our
-  // local store, we must specify the action types we want to capture.
+  // By default, all actions pass through to the parent store (assuming a parent
+  // store exists.) To handle actions within our local store, we must specify
+  // the action types that we want to capture.
   ['DO_SOMETHING_LOCAL']
 );
 
