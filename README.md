@@ -12,7 +12,7 @@ One of the [biggest sources of confusion](https://github.com/reactjs/redux/issue
 * State cannot be thrown away. Once a component initializes some state, it lives on indefinitely even after the component has been unmounted.
 * Not all state is meant to be shared. This makes it difficult to look at a reducer and know who might be using it.
 
-We can get around these limitations by using "branches". A branch is just another tree of Redux state. This allows each component to have its own Redux state while still being able to share state and dispatch actions with its parents. This also allows us to reuse reducers at different levels in the tree.
+We can get around these limitations by using "branches". A branch is just another tree of Redux state. This allows each component to have its own Redux store while still being able to interact with its parent store. This also allows us to reuse reducers anywhere in the tree.
 
 ## `branch(storeFactory, mergeReducer, actionTypes)`
 ```js
