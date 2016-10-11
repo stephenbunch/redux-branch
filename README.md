@@ -28,7 +28,7 @@ const branchedComponentFactory = branch(
 
   // Optionally subscribe to the parent store, and merge its state into our local
   // store whenever the parent store's state changes.
-  (local, upstream) => { ...upstream, ...local },
+  (localState, parentState) => { ...parentState, ...localState },
 
   // By default, all actions pass through to the parent store (assuming a parent
   // store exists.) To handle actions within our local store, we must specify
