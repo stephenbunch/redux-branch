@@ -40,6 +40,6 @@ function mapStateToProps(state) {
 
 export default branch(
   () => createStore(localReducer),
-  (local, upstream) => local.merge({ upstream })
+  ({ local, upstream }) => upstream.merge(local)
 )(connect(mapStateToProps))(Subview);
 ```
