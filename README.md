@@ -23,7 +23,7 @@ import { branch } from 'redux-branch';
 import someReducer from './someReducer';
 
 const branchedComponentFactory = branch(
-  // Define a factory for creating our local store.
+  // Specify a factory for creating our local store.
   () => createStore(someReducer),
 
   // Optionally subscribe to the parent store and merge its state into our local
