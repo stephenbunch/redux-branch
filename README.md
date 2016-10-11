@@ -35,10 +35,10 @@ const branchedComponentFactory = branch(
   ['DO_SOMETHING_LOCAL']
 );
 
-// Build our redux component like normal.
+// Wrap our component to connect it to the store.
 const ReduxComponent = connect(mapStateToProps)(MyComponent);
 
-// Then wrap it with another component to provide our branched store.
+// Then wrap it again to provide the branched store.
 const BranchedComponent = branchedComponentFactory(ReduxComponent);
 
 export default BranchedComponent;
