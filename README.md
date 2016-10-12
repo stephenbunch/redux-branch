@@ -6,6 +6,7 @@
 
 ## Table of Contents
 * [Introduction](#introduction)
+* [Live example](#live-example)
 * [`branch(storeFactory, [localActions])`](#branchstorefactory-localactions)
 
 ## Introduction
@@ -19,10 +20,13 @@ We can get around these limitations by using "branches". A branch is just a loca
 
 By default, dispatched actions are passed through to the parent store. To handle an action in the local store, specify the action type in the `localActions` parameter when calling `branch()`.
 
+## Live example
+http://codepen.io/stephenbunch/pen/ALakoz
+
 ## `branch(storeFactory, [localActions])`
 ```js
 import React, { PropTypes } from 'react';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { connect } from 'react-redux';
 import { branch } from 'redux-branch';
 
@@ -36,6 +40,8 @@ const counterReducer = (state = 0, action) => {
       return state;
   }
 };
+const reducer = combineReducers({ count: counterReducer });
+
 const increment = () => ({ type: 'INCREMENT' });
 const decrement = () => ({ type: 'DECREMENT' });
 
@@ -52,9 +58,9 @@ class Counter extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.props.increment}>+</button>
-        {' '}{this.props.count}{' '}
         <button onClick={this.props.decrement}>-</button>
+        {' '}{this.props.count}{' '}
+        <button onClick={this.props.increment}>+</button>
       </div>
     );
   }
@@ -62,7 +68,7 @@ class Counter extends React.Component {
 
 const provide = branch(
   // Specify a factory for creating our local store.
-  () => createStore(counterReducer),
+  () => createStore(reducer),
 
   // By default, all actions pass through to the parent store (assuming a parent
   // store exists.) To handle actions within our local store, we must specify
