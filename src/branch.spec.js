@@ -29,6 +29,7 @@ const createFixture = (...args) => {
   Counter.propTypes = {
     count: PropTypes.number,
     localCount: PropTypes.number,
+    children: PropTypes.node,
   };
   const provide = branch(...args);
   Counter = provide(connect(mapStateToProps)(Counter));
@@ -48,7 +49,7 @@ const createFixture = (...args) => {
 };
 
 it('should merge with the upstream state', () => {
-  const { wrapper, store, counter } = createFixture(storeFactory);
+  const { wrapper, store } = createFixture(storeFactory);
   expect(wrapper.text()).toBe('test 0/0');
   store.dispatch({ type: 'INCREMENT' });
   expect(wrapper.text()).toBe('test 1/0');
@@ -79,7 +80,7 @@ it('should hoist statics', () => {
   expect(Counter.foo).toBe(2);
 });
 
-it(`should work without a parent store`, () => {
+it('should work without a parent store', () => {
   let Counter = props => <div>{props.localCount}</div>;
   Counter.propTypes = {
     localCount: PropTypes.number,

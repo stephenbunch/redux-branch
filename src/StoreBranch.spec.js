@@ -1,8 +1,8 @@
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 /* global it expect */
 
-import StoreBranch from './StoreBranch';
 import { createStore } from 'redux';
+import StoreBranch from './StoreBranch';
 
 const counterReducer = (count = 0, action) => {
   switch (action.type) {
