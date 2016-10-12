@@ -17,7 +17,7 @@ One of the [biggest sources of confusion](https://github.com/reactjs/redux/issue
 
 We can get around these limitations by using "branches". A branch is just a fork whose local state is merged on top of its parent. This allows each component to have its own Redux store while still being able to interact with the parent store. (Note: It's important that the structure of the global Redux state is an object.)
 
-By default, dispatched actions are passed through to the global store. To handle an action in the local store, specify the action type in the `handleActions` parameter when calling `branch()`.
+By default, dispatched actions are passed through to the parent store. To handle an action in the local store, specify the action type in the `handleActions` parameter when calling `branch()`.
 
 ## `branch(storeFactory, [handleActions])`
 ```js
