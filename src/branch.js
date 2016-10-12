@@ -32,6 +32,7 @@ export default function branch(storeFactory, localActions = []) {
         } else {
           this.store = storeFactory();
         }
+        this.setInstance = ::this.setInstance;
       }
 
       getChildContext() {
@@ -40,8 +41,17 @@ export default function branch(storeFactory, localActions = []) {
         };
       }
 
+      setInstance(comp) {
+        if (!this.instance) {
+          this.instance = comp;
+        }
+      }
+
       render() {
-        return React.createElement(Component, this.props);
+        return React.createElement(Component, {
+          ...this.props,
+          ref: this.setInstance,
+        });
       }
     }
     const statics = Object.assign({}, Component);

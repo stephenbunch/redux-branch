@@ -93,3 +93,9 @@ it('should work without a parent store', () => {
   expect(wrapper.text()).toBe('1');
   wrapper.unmount();
 });
+
+it('should expose the wrapped instance', () => {
+  const { wrapper, counter } = createFixture(storeFactory);
+  expect(counter.instance.props.children).toBe('test');
+  wrapper.unmount();
+});
