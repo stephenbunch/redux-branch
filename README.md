@@ -21,12 +21,44 @@ By default, dispatched actions are passed through to the parent store. To handle
 
 ## `branch(storeFactory, [localActions])`
 ```js
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { createStore } from 'redux';
 import { connect } from 'react-redux';
 import { branch } from 'redux-branch';
 
-import counterReducer from './counterReducer';
+const counterReducer = (state = 0, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1;
+    case 'DECREMENT':
+      return state - 1;
+    default:
+      return state;
+  }
+};
+const increment = () => ({ type: 'INCREMENT' });
+const decrement = () => ({ type: 'DECREMENT' });
+
+const stateToProps = state => state;
+const dispatchToProps = { increment, decrement };
+
+class Counter extends React.Component {
+  static propTypes = {
+    count: PropTypes.number,
+    increment: PropTypes.func,
+    decrement: PropTypes.func,
+  };
+
+  render() {
+    return (
+      <div>
+        <button onClick={this.props.increment}>+</button>
+        {' '}{this.props.count}{' '}
+        <button onClick={this.props.decrement}>-</button>
+      </div>
+    );
+  }
+}
 
 const provide = branch(
   // Specify a factory for creating our local store.
@@ -38,7 +70,7 @@ const provide = branch(
   ['INCREMENT', 'DECREMENT']
 );
 
-export default provide(connect(mapStateToProps)(MyComponent));
+export default provide(connect(stateToProps, dispatchToProps)(Counter));
 ```
 
 [npm-image]: https://img.shields.io/npm/v/redux-branch.svg?style=flat-square
