@@ -1,37 +1,60 @@
 export default class StoreBranch {
-  constructor(upstream, branch, reducer, actionTypes) {
-    this._upstream = upstream;
-    this._branch = branch;
-    this._actionTypes = actionTypes;
-    this._reducer = reducer;
-    this._state = this._reducer(upstream.getState(), local.getState());
-    this._state = {
-      ...upstream.getState(),
-      ...branch.getState(),
-    };
+  constructor(upstream, local, handleActions, reducer) {
+    this.upstream = upstream;
+    this.local = local;
+    this.handleActions = handleActions;
+    this.reducer = reducer;
+    this.state = undefined;
+    this.listeners = [];
+    this.unsubscribe = null;
+  }
+
+  observeState() {
+    this.state = this.reducer(this.upstream.getState(), this.local.getState());
   }
 
   getState() {
-    return this._state;
+    if (this.listeners.length === 0) {
+      this.observeState();
+    }
+    return this.state;
   }
 
   dispatch(action) {
-    if (this._actionTypes.indexOf(action.type) > -1) {
-      this._branch.dispatch(action);
+    if (this.handleActions.indexOf(action.type) > -1) {
+      this.local.dispatch(action);
     } else {
-      this._upstream.dispatch(action);
+      this.upstream.dispatch(action);
     }
   }
 
   subscribe(listener) {
-    const update = () => {
-      this._state = this._reducer(upstream.getState(), local.getState());
-    };
-    const unsubscribeFromUpstream = this._upstream.subscribe(update);
-    const unsubscribeFromBranch = this._branch.subscribe(update);
+    this.listeners.push(listener);
+    if (this.listeners.length === 1) {
+      const handleChange = () => {
+        this.observeState();
+        const listeners = this.listeners.slice();
+        for (const listener of listeners) {
+          listener();
+        }
+      };
+      const unsubscribeFromUpstream = this.upstream.subscribe(handleChange);
+      const unsubscribeFromBranch = this.local.subscribe(handleChange);
+      this.unsubscribe = () => {
+        unsubscribeFromUpstream();
+        unsubscribeFromBranch();
+      };
+      this.observeState();
+    }
     return () => {
-      unsubscribeFromUpstream();
-      unsubscribeFromBranch();
+      const index = this.listeners.indexOf(listener);
+      if (index > -1) {
+        this.listeners.splice(index, 1);
+        if (this.listeners.length === 0) {
+          this.unsubscribe();
+          this.unsubscribe = null;
+        }
+      }
     };
   }
 }

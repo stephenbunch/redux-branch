@@ -6,7 +6,7 @@
 
 ## Table of Contents
 * [Introduction](#introduction)
-* [`branch(storeFactory, reducer, actionTypes)`](#branchstorefactory-reducer-actiontypes)
+* [`branch(storeFactory, [handleActions])`](#branchstorefactory-handleactions)
 
 ## Introduction
 One of the [biggest sources of confusion](https://github.com/reactjs/redux/issues/1385) when learning to use Redux is knowing when to use the component's local state versus the global Redux state. This is because Redux assumes a single store for the entire app. Although there are [many advantages](http://stackoverflow.com/questions/32461229/why-use-redux-over-facebook-flux) to using a single store, there are also some disadvantages:
@@ -18,17 +18,17 @@ One of the [biggest sources of confusion](https://github.com/reactjs/redux/issue
 
 We can get around these limitations by using "branches". A branch is just another tree of Redux state. This allows each component to have its own Redux store while still being able to interact with its parent store. This also allows us to reuse reducers anywhere in the tree.
 
-## `branch(storeFactory, [actionTypes])`
+## `branch(storeFactory, [handleActions])`
 ```js
 import React from 'react';
 import { createStore } from 'redux';
 import { branch } from 'redux-branch';
 
-import someReducer from './someReducer';
+import localReducer from './localReducer';
 
-const branchedComponentFactory = branch(
+const provide = branch(
   // Specify a factory for creating our local store.
-  () => createStore(someReducer),
+  () => createStore(localReducer),
 
   // By default, all actions pass through to the parent store (assuming a parent
   // store exists.) To handle actions within our local store, we must specify
@@ -36,13 +36,7 @@ const branchedComponentFactory = branch(
   ['DO_SOMETHING_LOCAL']
 );
 
-// Wrap our component to connect it to the store.
-const ReduxComponent = connect(mapStateToProps)(MyComponent);
-
-// Then wrap it again to provide the branched store.
-const BranchedComponent = branchedComponentFactory(ReduxComponent);
-
-export default BranchedComponent;
+export default provide(connect(mapStateToProps)(MyComponent));
 ```
 
 [npm-image]: https://img.shields.io/npm/v/redux-branch.svg?style=flat-square
