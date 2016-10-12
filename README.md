@@ -26,11 +26,11 @@ import { createStore } from 'redux';
 import { connect } from 'react-redux';
 import { branch } from 'redux-branch';
 
-import localReducer from './localReducer';
+import counterReducer from './counterReducer';
 
 const provide = branch(
   // Specify a factory for creating our local store.
-  () => createStore(localReducer),
+  () => createStore(counterReducer),
 
   // By default, all actions pass through to the parent store (assuming a parent
   // store exists.) To handle actions within our local store, we must specify
