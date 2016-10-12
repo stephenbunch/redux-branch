@@ -14,9 +14,7 @@ One of the [biggest sources of confusion](https://github.com/reactjs/redux/issue
 * Dynamically structured state is impossible.
 * [Global variables are bad](http://c2.com/cgi/wiki?GlobalVariablesAreBad).
 
-We can get around these limitations by using "branches". A branch is just another tree of Redux state. This allows each component to have its own Redux store while still being able to interact with the parent store.
-
-It is assumed that the global Redux state is an object. The local state is merged on top of the global state.
+We can get around these limitations by using "branches". A branch is just a fork whose local state is merged on top of its parent. This allows each component to have its own Redux store while still being able to interact with the parent store. (Note: It's important that the structure of the global Redux state is an object.)
 
 By default, dispatched actions are passed through to the global store. To handle an action in the local store, specify the action type in the `handleActions` parameter when calling `branch()`.
 
