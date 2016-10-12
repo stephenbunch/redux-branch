@@ -24,6 +24,7 @@ By default, dispatched actions are passed through to the global store. To handle
 ```js
 import React from 'react';
 import { createStore } from 'redux';
+import { connect } from 'react-redux';
 import { branch } from 'redux-branch';
 
 import localReducer from './localReducer';
