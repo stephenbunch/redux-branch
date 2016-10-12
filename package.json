@@ -1,8 +1,8 @@
 {
   "name": "redux-branch",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Branches for Redux.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "prepublish": "npm run eslint && npm run build && npm run bundle",
     "build": "rm -rf lib && babel src --out-dir lib",
