@@ -1,8 +1,8 @@
 export default class StoreBranch {
-  constructor(upstream, local, handleActions, reducer) {
+  constructor(upstream, local, localActions, reducer) {
     this.upstream = upstream;
     this.local = local;
-    this.handleActions = handleActions;
+    this.localActions = localActions;
     this.reducer = reducer;
     this.state = undefined;
     this.listeners = [];
@@ -21,7 +21,7 @@ export default class StoreBranch {
   }
 
   dispatch(action) {
-    if (this.handleActions.indexOf(action.type) > -1) {
+    if (this.localActions.indexOf(action.type) > -1) {
       this.local.dispatch(action);
     } else {
       this.upstream.dispatch(action);

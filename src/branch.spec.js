@@ -56,7 +56,7 @@ it('should merge with the upstream state', () => {
   wrapper.unmount();
 });
 
-it('should handle specified actions', () => {
+it('should handle local actions', () => {
   const { wrapper, store, counter } = createFixture(storeFactory, ['INCREMENT']);
   store.dispatch({ type: 'INCREMENT' });
   counter.store.dispatch({ type: 'INCREMENT' });
@@ -64,7 +64,7 @@ it('should handle specified actions', () => {
   wrapper.unmount();
 });
 
-it('should not handle unspecified actions', () => {
+it('should not handle global actions', () => {
   const { wrapper, store, counter } = createFixture(storeFactory);
   store.dispatch({ type: 'INCREMENT' });
   counter.store.dispatch({ type: 'INCREMENT' });

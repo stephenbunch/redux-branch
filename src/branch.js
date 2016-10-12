@@ -5,7 +5,7 @@ import storeShape from './storeShape';
 
 const defaultReducer = (upstream, local) => Object.assign({}, upstream, local);
 
-export default function branch(storeFactory, handledActions = []) {
+export default function branch(storeFactory, localActions = []) {
   return Component => {
     class Branch extends React.Component {
       static contextTypes = {
@@ -26,7 +26,7 @@ export default function branch(storeFactory, handledActions = []) {
           this.store = new StoreBranch(
             props.store || context.store,
             storeFactory(),
-            handledActions,
+            localActions,
             defaultReducer
           );
         } else {

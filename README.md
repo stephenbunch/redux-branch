@@ -6,7 +6,7 @@
 
 ## Table of Contents
 * [Introduction](#introduction)
-* [`branch(storeFactory, [handleActions])`](#branchstorefactory-handleactions)
+* [`branch(storeFactory, [localActions])`](#branchstorefactory-localactions)
 
 ## Introduction
 One of the [biggest sources of confusion](https://github.com/reactjs/redux/issues/1385) when learning to use Redux is knowing when to use the component's local state versus the global Redux state. Although there are [many advantages](http://stackoverflow.com/questions/32461229/why-use-redux-over-facebook-flux) to using a single store, there are also some disadvantages:
@@ -17,9 +17,9 @@ One of the [biggest sources of confusion](https://github.com/reactjs/redux/issue
 
 We can get around these limitations by using "branches". A branch is just a fork whose local state is merged on top of its parent. This allows each component to have its own Redux store while still being able to interact with the parent store. (Note: It's important that the structure of the global Redux state is an object.)
 
-By default, dispatched actions are passed through to the parent store. To handle an action in the local store, specify the action type in the `handleActions` parameter when calling `branch()`.
+By default, dispatched actions are passed through to the parent store. To handle an action in the local store, specify the action type in the `localActions` parameter when calling `branch()`.
 
-## `branch(storeFactory, [handleActions])`
+## `branch(storeFactory, [localActions])`
 ```js
 import React from 'react';
 import { createStore } from 'redux';
