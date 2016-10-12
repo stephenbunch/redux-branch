@@ -3,7 +3,7 @@ import React from 'react';
 import StoreBranch from './StoreBranch';
 import storeShape from './storeShape';
 
-const defaultReducer = (upstream, local) => ({ ...upstream, ...local });
+const defaultReducer = (upstream, local) => Object.assign({}, upstream, local);
 
 export default function branch(storeFactory, handledActions = []) {
   return Component => {
@@ -44,7 +44,7 @@ export default function branch(storeFactory, handledActions = []) {
         return React.createElement(Component, this.props);
       }
     }
-    const statics = { ...Component };
+    const statics = Object.assign({}, Component);
     delete statics.propTypes;
     delete statics.contextTypes;
     delete statics.childContextTypes;
