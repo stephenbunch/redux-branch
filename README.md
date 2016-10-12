@@ -13,7 +13,7 @@ One of the [biggest sources of confusion](https://github.com/reactjs/redux/issue
 
 * Dynamically structured state is impossible.
 * [Global variables are bad](http://c2.com/cgi/wiki?GlobalVariablesAreBad).
-* Performance suffers as your graph gets larger.
+* Performance suffers as your state tree gets larger.
 
 We can get around these limitations by using "branches". A branch is just a fork whose local state is merged on top of its parent. This allows each component to have its own Redux store while still being able to interact with the parent store. (Note: It's important that the structure of the global Redux state is an object.)
 
